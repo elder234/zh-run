@@ -111,13 +111,15 @@ async def get_telegraph_list(telegraph_content):
 
 
 def get_progress_bar_string(pct):
-    if isinstance(pct, str):
-        pct = float(pct.strip('%'))
+    pct = float(str(pct).strip('%'))
     p = min(max(pct, 0), 100)
-    cFull = int(p // 10)
-    p_str = '▓' * cFull
-    p_str += '░' * (10 - cFull)
-    return f"{p_str}"
+    cFull = int(p // 8)
+    cPart = int(p % 8 - 1)
+    p_str = '●' * cFull
+    if cPart >= 0:
+        p_str += ['◔', '◓', '◒', '◑', '◐', '◕', '●'][cPart]
+    p_str += '○' * (12 - cFull)
+    return f"[{p_str}]"
 
 
 def get_readable_message():
@@ -145,12 +147,13 @@ def get_readable_message():
         if download.status() not in [MirrorStatus.STATUS_SEEDING, MirrorStatus.STATUS_PAUSED,
                                      MirrorStatus.STATUS_QUEUEDL, MirrorStatus.STATUS_QUEUEUP]:
 
-            msg += f" » {download.speed()}"
-            msg += f"\n• {get_progress_bar_string(download.progress())} » {download.progress()}"
-            msg += f"\n• <code>Done     </code>» {download.processed_bytes()} of {download.size()}"
-            msg += f"\n• <code>ETA      </code>» {download.eta()}"
-            msg += f"\n• <code>Active   </code>» {get_readable_time(elapsed)}"
-            msg += f"\n• <code>Engine   </code>» {download.engine}"
+            
+            msg += f"\n╭ {get_progress_bar_string(download.progress())} » {download.progress()}"
+            msg += f"\n├ {download.speed()}"
+            msg += f"\n├ <code>Done     </code>» {download.processed_bytes()} of {download.size()}"
+            msg += f"\n├ <code>ETA      </code>» {download.eta()}"
+            msg += f"\n├ <code>Active   </code>» {get_readable_time(elapsed)}"
+            msg += f"\n├ <code>Engine   </code>» {download.engine}"
 
             if hasattr(download, 'playList'):
                 try:
@@ -161,27 +164,27 @@ def get_readable_message():
 
             if hasattr(download, 'seeders_num'):
                 try:
-                    msg += f"\n• <code>Seeders  </code>» {download.seeders_num()}"
-                    msg += f"\n• <code>Leechers </code>» {download.leechers_num()}"
+                    msg += f"\n├ <code>Seeders  </code>» {download.seeders_num()}"
+                    msg += f"\n├ <code>Leechers </code>» {download.leechers_num()}"
                 except:
                     pass
 
         elif download.status() == MirrorStatus.STATUS_SEEDING:
-            msg += f"\n• <code>Size     </code>» {download.size()}"
-            msg += f"\n• <code>Speed    </code>» {download.upload_speed()}"
-            msg += f"\n• <code>Uploaded </code>» {download.uploaded_bytes()}"
-            msg += f"\n• <code>Ratio    </code>» {download.ratio()}"
-            msg += f"\n• <code>Time     </code>» {download.seeding_time()}"
+            msg += f"\n├ <code>Size     </code>» {download.size()}"
+            msg += f"\n├ <code>Speed    </code>» {download.upload_speed()}"
+            msg += f"\n├ <code>Uploaded </code>» {download.uploaded_bytes()}"
+            msg += f"\n├ <code>Ratio    </code>» {download.ratio()}"
+            msg += f"\n├ <code>Time     </code>» {download.seeding_time()}"
         else:
-            msg += f"\n• <code>Size     </code>» {download.size()}"
+            msg += f"\n├ <code>Size     </code>» {download.size()}"
 
         if config_dict['DELETE_LINKS']:
-            msg += f"\n• <code>Task     </code>» {download.extra_details['mode']}"
+            msg += f"\n├ <code>Task     </code>» {download.extra_details['mode']}"
         else:
-            msg += f"\n• <code>Task     </code>» <a href='{download.message.link}'>{download.extra_details['mode']}</a>"
+            msg += f"\n├ <code>Task     </code>» <a href='{download.message.link}'>{download.extra_details['mode']}</a>"
 
-        msg += f"\n• <code>User     </code>» {tag}"
-        msg += f"\n⚠️ /{BotCommands.CancelMirror}_{download.gid()}\n\n"
+        msg += f"\n╰ <code>User     </code>» {tag}"
+        msg += f"\n☠︎ /{BotCommands.CancelMirror}_{download.gid()}\n\n"
 
     if len(msg) == 0:
         return None, None
@@ -220,10 +223,10 @@ def get_readable_message():
         button = buttons.build_menu(3)
 
     msg += "____________________________"
-    msg += f"\n<b>DL</b>: <code>{get_readable_file_size(dl_speed)}/s</code>"
-    msg += f" | <b>UL</b>: <code>{get_readable_file_size(up_speed)}/s</code>"
+    msg += f"\n╭<b>DL</b>: <code>{get_readable_file_size(dl_speed)}/s</code>"
+    msg += f"\n╰<b>UL</b>: <code>{get_readable_file_size(up_speed)}/s</code>"
     remaining_time = 86400 - (time() - botStartTime)
-    res_time = '⚠️ ANYTIME ⚠️' if remaining_time <= 0 else get_readable_time(remaining_time)
+    res_time = '☠︎ ANYTIME ☠︎' if remaining_time <= 0 else get_readable_time(remaining_time)
     if remaining_time <= 3600:
         msg += f"\n<b>Bot Restarts In:</b> <code>{res_time}</code>"
     return msg, button
@@ -254,13 +257,13 @@ async def fstats(_, query):
         elif status == MirrorStatus.STATUS_SEEDING:
             seed += 1
 
-    stat = f'_____Zee Bot Info_____\n\n'\
-           f'Active: {acti}, Free: {free}, Queued: {inqu}\n\n' \
-           f'Download: {dwld}, Upload: {upld}, Seed: {seed}\n\n' \
-           f'Split: {splt}, Clone: {clon}\n\n' \
-           f'Zip: {arch}, UnZip: {extr}\n\n' \
-           f'Free Disk: {fdisk} ' \
-           f'Uptime: {get_readable_time(uptm)}'
+    stat = f'_____Bot Info_____\n\n'\
+           f'\n├Active: {acti}, Free: {free}, Queued: {inqu}\n\n' \
+           f'\n├Download: {dwld}, Upload: {upld}, Seed: {seed}\n\n' \
+           f'\n├Split: {splt}, Clone: {clon}\n\n' \
+           f'\n├Zip: {arch}, UnZip: {extr}\n\n' \
+           f'\n├Free Disk: {fdisk} ' \
+           f'\n├Uptime: {get_readable_time(uptm)}'
     await query.answer(stat, show_alert=True)
 
 
