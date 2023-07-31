@@ -66,21 +66,21 @@ async def stats(_, message, edit_mode=False):
                 f'●<code>Total Bandwidth : </code> {tb}'
 
   
-    sys_stats = f'⌬<b><i><u>System Statistics</u></i></b>\n\n'\
-                f'╭<b>System Uptime:</b> <code>{sysTime}</code>\n' \
-                f'├<b>P-Core(s):</b> <code>{cpu_count(logical=False)}</code> | ' \
-                f'├<b>V-Core(s):</b> <code>{v_core}</code>\n' \
-                f'╰<b>Frequency:</b> <code>{cpu_freq(percpu=False).current / 1000:.2f} GHz</code>\n\n' \
-                f'●<b>CPU:</b> {get_progress_bar_string(cpuUsage)}<code> {cpuUsage}%</code>\n' \
-                f'╰<b>CPU Total Core(s):</b> <code>{cpu_count(logical=True)}</code>\n\n' \
-                f'●<b>RAM:</b> {get_progress_bar_string(mem_p)}<code> {mem_p}%</code>\n' \
-                f'╰<b>Total:</b> <code>{get_readable_file_size(memory.total)}</code> | ' \
-                f'●<b>Free:</b> <code>{get_readable_file_size(memory.available)}</code>\n\n' \
-                f'●<b>SWAP:</b> {get_progress_bar_string(swap.percent)}<code> {swap.percent}%</code>\n' \
-                f'╰<b>Total</b> <code>{get_readable_file_size(swap.total)}</code> | ' \
-                f'●<b>Free:</b> <code>{get_readable_file_size(swap.free)}</code>\n\n' \
-                f'●<b>DISK:</b> {get_progress_bar_string(disk)}<code> {disk}%</code>\n' \
-                f'╰<b>Total:</b> <code>{total}</code> | <b>Free:</b> <code>{free}</code>'
+    sys_stats = f'⌬<b><i><u>🔰System Statistics🔰</u></i></b>\n\n'\
+                f'╭<b>👽System Uptime:</b> <code>{sysTime}</code>\n' \
+                f'├<b>🪝P-Core(s):</b> <code>{cpu_count(logical=False)}</code> | ' \
+                f'├<b>💡V-Core(s):</b> <code>{v_core}</code>\n' \
+                f'╰<b>♦️Frequency:</b> <code>{cpu_freq(percpu=False).current / 1000:.2f} GHz</code>\n\n' \
+                f'●<b>🖥CPU:</b> {get_progress_bar_string(cpuUsage)}<code> {cpuUsage}%</code>\n' \
+                f'╰<b>🖥CPU Total Core(s):</b> <code>{cpu_count(logical=True)}</code>\n\n' \
+                f'●<b>📀RAM:</b> {get_progress_bar_string(mem_p)}<code> {mem_p}%</code>\n' \
+                f'╰<b>💿Total:</b> <code>{get_readable_file_size(memory.total)}</code> | ' \
+                f'●<b>📀Free:</b> <code>{get_readable_file_size(memory.available)}</code>\n\n' \
+                f'●<b>♠️SWAP:</b> {get_progress_bar_string(swap.percent)}<code> {swap.percent}%</code>\n' \
+                f'╰<b>🖥Total</b> <code>{get_readable_file_size(swap.total)}</code> | ' \
+                f'●<b>💿Free:</b> <code>{get_readable_file_size(swap.free)}</code>\n\n' \
+                f'●<b>💾DISK:</b> {get_progress_bar_string(disk)}<code> {disk}%</code>\n' \
+                f'╰<b>💿Total:</b> <code>{total}</code> | <b>Free:</b> <code>{free}</code>'
 
 
     buttons.ibutton("Sys Stats",  "show_sys_stats")
@@ -128,7 +128,7 @@ async def send_repo_stats(_, query):
         version     = 'N/A'
         change_log  = 'N/A'
 
-    repo_stats = f'⌬<b><i><u>Repo Info</u></i></b>\n\n' \
+    repo_stats = f'⌬<b><i><u>🎗Repo Info🎗</u></i></b>\n\n' \
                   f'╭<code>Updated   : </code> {last_commit}\n' \
                   f'├<code>Version   : </code> {version}\n' \
                   f'╰<code>Changelog : </code> {change_log}'
@@ -154,16 +154,16 @@ async def send_bot_limits(_, query):
     UMT = 'Unlimited' if config_dict['USER_MAX_TASKS']  == '' else config_dict['USER_MAX_TASKS']
     BMT = 'Unlimited' if config_dict['QUEUE_ALL']       == '' else config_dict['QUEUE_ALL']
 
-    bot_limit = f'⌬<b><i><u>Bot Limitations</u></i></b>\n' \
-                f'╭<code>Torrent   : {TOR}</code> <b>GB</b>\n' \
-                f'├<code>G-Drive   : {GDL}</code> <b>GB</b>\n' \
-                f'├<code>Yt-Dlp    : {YTD}</code> <b>GB</b>\n' \
-                f'├<code>Direct    : {DIR}</code> <b>GB</b>\n' \
-                f'├<code>Clone     : {CLL}</code> <b>GB</b>\n' \
-                f'├<code>Leech     : {TGL}</code> <b>GB</b>\n' \
-                f'╰<code>MEGA      : {MGA}</code> <b>GB</b>\n\n' \
-                f'╭<code>User Tasks: {UMT}</code>\n' \
-                f'╰<code>Bot Tasks : {BMT}</code>'
+    bot_limit = f'⌬<b><i><u>📊Bot Limitations</u></i></b>\n' \
+                f'╭<code>🌱Torrent   : {TOR}</code> <b>GB</b>\n' \
+                f'├<code>☁️G-Drive   : {GDL}</code> <b>GB</b>\n' \
+                f'├<code>⭐️Yt-Dlp    : {YTD}</code> <b>GB</b>\n' \
+                f'├<code>☀️Direct    : {DIR}</code> <b>GB</b>\n' \
+                f'├<code>🌀Clone     : {CLL}</code> <b>GB</b>\n' \
+                f'├<code>⚡️Leech     : {TGL}</code> <b>GB</b>\n' \
+                f'╰<code>♨️MEGA      : {MGA}</code> <b>GB</b>\n\n' \
+                f'╭<code>🙎‍♂️User Tasks: {UMT}</code>\n' \
+                f'╰<code>🐧Bot Tasks : {BMT}</code>'
 
     buttons.ibutton("Bot Stats",  "show_bot_stats")
     buttons.ibutton("Sys Stats",  "show_sys_stats")
@@ -195,17 +195,17 @@ async def start(_, message):
         data['token'] = str(uuid4())
         data['time'] = time()
         user_data[userid].update(data)
-        msg = 'Token refreshed successfully!\n\n'
+        msg = 'Token refreshed successfully!\n Enjoy😏\n'
         msg += f'Validity: {get_readable_time(int(config_dict["TOKEN_TIMEOUT"]))}'
         return await sendMessage(message, msg)
     elif config_dict['DM_MODE']:
-        start_string = 'Bot Started.\n' \
+        start_string = '❤️Bot Started❤️\n' \
                        'Now I can send your stuff here.\n' \
-                       'Use me here: @Z_Mirror'
+                       'Use me here: @starkzer'
     else:
-        start_string = 'Sorry, you cant use me here!\n' \
-                       'Join @Z_Mirror to use me.\n' \
-                       'Thank You'
+        start_string = 'Sorry🤭, you cant use me here!\n' \
+                       'Join @starkzer to use me.\n' \
+                       'Thank You😏'
     await sendMessage(message, start_string)
 
 
@@ -233,7 +233,7 @@ async def ping(_, message):
     await editMessage(reply, f'{ping_time} ms')
 
 async def log(_, message):
-    await sendFile(message, 'Z_Logs.txt')
+    await sendFile(message, 'Logs.txt')
 
 help_string = f'''
 <b>NOTE: Click on any CMD to see more detalis.</b>
@@ -331,7 +331,7 @@ async def restart_notification():
             for cid, data in notifier_dict.items():
                 msg = 'Restarted Successfully!' if cid == chat_id else 'Bot Restarted!'
                 for tag, links in data.items():
-                    msg += f"\n\n👤 {tag} Do your tasks again. \n"
+                    msg += f"\n\n👤 {tag} kindly add your tasks again.💡 \n"
                     for index, link in enumerate(links, start=1):
                         msg += f" {index}: {link} \n"
                         if len(msg.encode()) > 4000:
@@ -346,7 +346,7 @@ async def restart_notification():
 
     if await aiopath.isfile(".restartmsg"):
         try:
-            await bot.edit_message_text(chat_id=chat_id, message_id=msg_id, text='Restarted Successfully!')
+            await bot.edit_message_text(chat_id=chat_id, message_id=msg_id, text='Restarted Successfully‼️')
         except:
             pass
         await aioremove(".restartmsg")
@@ -368,7 +368,7 @@ async def main():
     bot.add_handler(CallbackQueryHandler(send_sys_stats,    filters=regex("^show_sys_stats")))
     bot.add_handler(CallbackQueryHandler(send_repo_stats,   filters=regex("^show_repo_stats")))
     bot.add_handler(CallbackQueryHandler(send_bot_limits,   filters=regex("^show_bot_limits")))
-    LOGGER.info("Congratulations, Bot Started Successfully!")
+    LOGGER.info("Congratulations, Bot Started Successfully‼️")
     signal(SIGINT, exit_clean_up)
 
 bot.loop.run_until_complete(main())
