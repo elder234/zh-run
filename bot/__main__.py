@@ -55,10 +55,10 @@ async def stats(_, message, edit_mode=False):
     mem_p       = memory.percent
 
     bot_stats = f'⌬<b><i><u>Bot Statistics</u></i></b>\n\n'\
-                f'╭<code>CPU  : </code>{get_progress_bar_string(cpuUsage)} {cpuUsage}%\n' \
-                f'├<code>RAM  : </code>{get_progress_bar_string(mem_p)} {mem_p}%\n' \
-                f'├<code>SWAP : </code>{get_progress_bar_string(swap.percent)} {swap.percent}%\n' \
-                f'╰<code>DISK : </code>{get_progress_bar_string(disk)} {disk}%\n\n' \
+                f'╭<code>🖥CPU  : </code>{get_progress_bar_string(cpuUsage)} {cpuUsage}%\n' \
+                f'├<code>💿RAM  : </code>{get_progress_bar_string(mem_p)} {mem_p}%\n' \
+                f'├<code>📀SWAP : </code>{get_progress_bar_string(swap.percent)} {swap.percent}%\n' \
+                f'╰<code>💾DISK : </code>{get_progress_bar_string(disk)} {disk}%\n\n' \
                 f'●<code>Bot Uptime      : </code> {botTime}\n' \
                 f'●<code>BOT Restart     : </code> {res_time}\n\n' \
                 f'●<code>Uploaded        : </code> {sent}\n' \
