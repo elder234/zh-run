@@ -29,7 +29,7 @@ async def mirror_status(_, message):
         msg = '<b>Uninstall Oops🤭 Currently....</b>'
         msg += '\n\nNo Active Tasks‼️\n___________________________'
         msg += f"\n<b>╭🖥CPU</b>: {cpu_percent()}% | <b>FREE</b>: {free}" \
-               f"\n<b╰💿>RAM</b>: {virtual_memory().percent}% | <b>UPTIME</b>: {currentTime}"
+               f"\n<b>╰💿>RAM</b>: {virtual_memory().percent}% | <b>UPTIME</b>: {currentTime}"
         reply_message = await sendMessage(message, msg)
         await auto_delete_message(message, reply_message)
     else:
