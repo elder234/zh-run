@@ -54,32 +54,34 @@ async def stats(_, message, edit_mode=False):
     swap        = swap_memory()
     mem_p       = memory.percent
 
-    bot_stats = f'<b><i><u>Zee Bot Statistics</u></i></b>\n\n'\
-                f'<code>CPU  : </code>{get_progress_bar_string(cpuUsage)} {cpuUsage}%\n' \
-                f'<code>RAM  : </code>{get_progress_bar_string(mem_p)} {mem_p}%\n' \
-                f'<code>SWAP : </code>{get_progress_bar_string(swap.percent)} {swap.percent}%\n' \
-                f'<code>DISK : </code>{get_progress_bar_string(disk)} {disk}%\n\n' \
-                f'<code>Bot Uptime      : </code> {botTime}\n' \
-                f'<code>BOT Restart     : </code> {res_time}\n\n' \
-                f'<code>Uploaded        : </code> {sent}\n' \
-                f'<code>Downloaded      : </code> {recv}\n' \
-                f'<code>Total Bandwidth : </code> {tb}'
+    bot_stats = f'⌬<b><i><u>Bot Statistics</u></i></b>\n\n'\
+                f'╭<code>CPU  : </code>{get_progress_bar_string(cpuUsage)} {cpuUsage}%\n' \
+                f'├<code>RAM  : </code>{get_progress_bar_string(mem_p)} {mem_p}%\n' \
+                f'├<code>SWAP : </code>{get_progress_bar_string(swap.percent)} {swap.percent}%\n' \
+                f'╰<code>DISK : </code>{get_progress_bar_string(disk)} {disk}%\n\n' \
+                f'●<code>Bot Uptime      : </code> {botTime}\n' \
+                f'●<code>BOT Restart     : </code> {res_time}\n\n' \
+                f'●<code>Uploaded        : </code> {sent}\n' \
+                f'●<code>Downloaded      : </code> {recv}\n' \
+                f'●<code>Total Bandwidth : </code> {tb}'
 
-    sys_stats = f'<b><i><u>Zee System Statistics</u></i></b>\n\n'\
-                f'<b>System Uptime:</b> <code>{sysTime}</code>\n' \
-                f'<b>CPU:</b> {get_progress_bar_string(cpuUsage)}<code> {cpuUsage}%</code>\n' \
-                f'<b>CPU Total Core(s):</b> <code>{cpu_count(logical=True)}</code>\n' \
-                f'<b>P-Core(s):</b> <code>{cpu_count(logical=False)}</code> | ' \
-                f'<b>V-Core(s):</b> <code>{v_core}</code>\n' \
-                f'<b>Frequency:</b> <code>{cpu_freq(percpu=False).current / 1000:.2f} GHz</code>\n\n' \
-                f'<b>RAM:</b> {get_progress_bar_string(mem_p)}<code> {mem_p}%</code>\n' \
-                f'<b>Total:</b> <code>{get_readable_file_size(memory.total)}</code> | ' \
-                f'<b>Free:</b> <code>{get_readable_file_size(memory.available)}</code>\n\n' \
-                f'<b>SWAP:</b> {get_progress_bar_string(swap.percent)}<code> {swap.percent}%</code>\n' \
-                f'<b>Total</b> <code>{get_readable_file_size(swap.total)}</code> | ' \
-                f'<b>Free:</b> <code>{get_readable_file_size(swap.free)}</code>\n\n' \
-                f'<b>DISK:</b> {get_progress_bar_string(disk)}<code> {disk}%</code>\n' \
-                f'<b>Total:</b> <code>{total}</code> | <b>Free:</b> <code>{free}</code>'
+  
+    sys_stats = f'⌬<b><i><u>System Statistics</u></i></b>\n\n'\
+                f'╭<b>System Uptime:</b> <code>{sysTime}</code>\n' \
+                f'├<b>P-Core(s):</b> <code>{cpu_count(logical=False)}</code> | ' \
+                f'├<b>V-Core(s):</b> <code>{v_core}</code>\n' \
+                f'╰<b>Frequency:</b> <code>{cpu_freq(percpu=False).current / 1000:.2f} GHz</code>\n\n' \
+                f'●<b>CPU:</b> {get_progress_bar_string(cpuUsage)}<code> {cpuUsage}%</code>\n' \
+                f'╰<b>CPU Total Core(s):</b> <code>{cpu_count(logical=True)}</code>\n\n' \
+                f'●<b>RAM:</b> {get_progress_bar_string(mem_p)}<code> {mem_p}%</code>\n' \
+                f'╰<b>Total:</b> <code>{get_readable_file_size(memory.total)}</code> | ' \
+                f'●<b>Free:</b> <code>{get_readable_file_size(memory.available)}</code>\n\n' \
+                f'●<b>SWAP:</b> {get_progress_bar_string(swap.percent)}<code> {swap.percent}%</code>\n' \
+                f'╰<b>Total</b> <code>{get_readable_file_size(swap.total)}</code> | ' \
+                f'●<b>Free:</b> <code>{get_readable_file_size(swap.free)}</code>\n\n' \
+                f'●<b>DISK:</b> {get_progress_bar_string(disk)}<code> {disk}%</code>\n' \
+                f'╰<b>Total:</b> <code>{total}</code> | <b>Free:</b> <code>{free}</code>'
+
 
     buttons.ibutton("Sys Stats",  "show_sys_stats")
     buttons.ibutton("Repo Stats", "show_repo_stats")
@@ -126,10 +128,10 @@ async def send_repo_stats(_, query):
         version     = 'N/A'
         change_log  = 'N/A'
 
-    repo_stats = f'<b><i><u>Repo Info</u></i></b>\n\n' \
-                  f'<code>Updated   : </code> {last_commit}\n' \
-                  f'<code>Version   : </code> {version}\n' \
-                  f'<code>Changelog : </code> {change_log}'
+    repo_stats = f'⌬<b><i><u>Repo Info</u></i></b>\n\n' \
+                  f'╭<code>Updated   : </code> {last_commit}\n' \
+                  f'├<code>Version   : </code> {version}\n' \
+                  f'╰<code>Changelog : </code> {change_log}'
 
     buttons.ibutton("Bot Stats",  "show_bot_stats")
     buttons.ibutton("Sys Stats",  "show_sys_stats")
@@ -152,16 +154,16 @@ async def send_bot_limits(_, query):
     UMT = 'Unlimited' if config_dict['USER_MAX_TASKS']  == '' else config_dict['USER_MAX_TASKS']
     BMT = 'Unlimited' if config_dict['QUEUE_ALL']       == '' else config_dict['QUEUE_ALL']
 
-    bot_limit = f'<b><i><u>Zee Bot Limitations</u></i></b>\n' \
-                f'<code>Torrent   : {TOR}</code> <b>GB</b>\n' \
-                f'<code>G-Drive   : {GDL}</code> <b>GB</b>\n' \
-                f'<code>Yt-Dlp    : {YTD}</code> <b>GB</b>\n' \
-                f'<code>Direct    : {DIR}</code> <b>GB</b>\n' \
-                f'<code>Clone     : {CLL}</code> <b>GB</b>\n' \
-                f'<code>Leech     : {TGL}</code> <b>GB</b>\n' \
-                f'<code>MEGA      : {MGA}</code> <b>GB</b>\n\n' \
-                f'<code>User Tasks: {UMT}</code>\n' \
-                f'<code>Bot Tasks : {BMT}</code>'
+    bot_limit = f'⌬<b><i><u>Bot Limitations</u></i></b>\n' \
+                f'╭<code>Torrent   : {TOR}</code> <b>GB</b>\n' \
+                f'├<code>G-Drive   : {GDL}</code> <b>GB</b>\n' \
+                f'├<code>Yt-Dlp    : {YTD}</code> <b>GB</b>\n' \
+                f'├<code>Direct    : {DIR}</code> <b>GB</b>\n' \
+                f'├<code>Clone     : {CLL}</code> <b>GB</b>\n' \
+                f'├<code>Leech     : {TGL}</code> <b>GB</b>\n' \
+                f'╰<code>MEGA      : {MGA}</code> <b>GB</b>\n\n' \
+                f'╭<code>User Tasks: {UMT}</code>\n' \
+                f'╰<code>Bot Tasks : {BMT}</code>'
 
     buttons.ibutton("Bot Stats",  "show_bot_stats")
     buttons.ibutton("Sys Stats",  "show_sys_stats")
